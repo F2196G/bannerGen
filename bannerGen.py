@@ -1,21 +1,21 @@
 from PIL import Image, ImageDraw, ImageFont
-import os
+from pathlib import Path
 import urllib.request
 
 def generateBanner(title, version, uptime, system, plugins):
     
-    scriptDir = os.path.dirname(os.path.abspath(__file__))
-    fontPath = os.path.join(scriptDir, 'RobotoMono-Regular.ttf')
-    outputPath = os.path.join(scriptDir, 'output.jpg')
-    imgPathUrl = os.path.join(scriptDir, 'misatobg.jpg')
+    scriptDir = Path(__file__).resolve().parent
+    fontPath = scriptDir / 'RobotoMono-Regular.ttf'
+    outputPath = scriptDir / 'output.jpg'
+    imgPathUrl = scriptDir / 'misatobg.jpg'
         
-    if not os.path.exists(imgPathUrl):
+    if not imgPathUrl.exists():
         urllib.request.urlretrieve('https://cdn.r0rt1z2.com/misatobg.jpg', imgPathUrl)
 
     with Image.open(imgPathUrl) as img:
 
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype(fontPath, 15)
+        font = ImageFont.truetype(str(fontPath), 15)
         
         textBody = f"• Version: {version} \n\n• Uptime: {uptime} \n\n• System: {system} \n\n• Plugins: {plugins} plugin(s) active"
 
@@ -24,4 +24,4 @@ def generateBanner(title, version, uptime, system, plugins):
 
         img.save(outputPath, quality = 95)
 
-    return outputPath    
+    return str(outputPath)    
