@@ -10,7 +10,7 @@ def generateBanner(version, uptime, system, plugins):
     imgPathUrl = os.path.join(scriptDir, 'misatobg.jpg')
         
     if not os.path.exists(imgPathUrl):
-        urllib.request.urlretrieve('http://custompng.altervista.org/Server/misatobg.jpg', imgPathUrl)
+        urllib.request.urlretrieve('https://cdn.r0rt1z2.com/misatobg.jpg', imgPathUrl)
 
     with Image.open(imgPathUrl) as img:
 
